@@ -1,23 +1,16 @@
 import { NextResponse } from "next/server";
-import { readFile } from "fs/promises";
-import path from "path";
+import daily from "../../../data/gold_daily_revenue.json";
+import categories from "../../../data/gold_category_summary.json";
+import status from "../../../data/pipeline_status.json";
 
-// Files exported by pipeline/run_pipeline.py into web/data/.
-const FILES = [
-  "gold_daily_revenue",
-  "gold_category_summary",
-  "pipeline_status",
-] as const;
+// The JSON files are exported by pipeline/run_pipeline.py into web/data/.
+// They are imported directly, so they are bundled at build time.
+export const dynamic = "force-static";
 
-export async function GET() {
-  const dataDir = path.join(process.cwd(), "data");
-
-  const entries = await Promise.all(
-    FILES.map(async (name) => {
-      const raw = await readFile(path.join(dataDir, `${name}.json`), "utf-8");
-      return [name, JSON.parse(raw)] as const;
-    })
-  );
-
-  return NextResponse.json(Object.fromEntries(entries));
+export function GET() {
+  return NextResponse.json({
+    gold_daily_revenue: daily,
+    gold_category_summary: categories,
+    pipeline_status: status,
+  });
 }
