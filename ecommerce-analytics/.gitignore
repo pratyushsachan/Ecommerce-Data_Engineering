@@ -1,0 +1,8 @@
+.venv/
+__pycache__/
+data/raw/
+data/warehouse.duckdb
+web/node_modules/
+web/.next/
+web/next-env.d.ts
+.DS_Store

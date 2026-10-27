@@ -1,0 +1,12 @@
+{
+  "ran_at": "2026-10-27T20:17:48.113730+00:00",
+  "bronze_orders": 5050,
+  "silver_orders": 4900,
+  "rows_removed": 150,
+  "tests": {
+    "01_unique_order_id": 0,
+    "02_positive_quantity": 0,
+    "03_customer_exists": 0,
+    "04_revenue_present": 0
+  }
+}
